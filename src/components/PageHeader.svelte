@@ -5,16 +5,28 @@
 </script>
 
 <style>
-  .page-header {
-    margin: 25px 0px;
+  /* .page-header {
+    margin: 15px 0px 25px 0px;
   }
   .page-header .section-nav-wrapper {
     margin: 0px 0px 15px 0px;
     align-items: center;
-  }
-  .page-header h1 a {
+  } */
+  /* .page-header h1 {
+    font-style: normal;
+    text-align: justify;
     line-height: 1.24;
     margin: 1.2rem 0px;
+    color: var(--text);
+    font-size: 3rem;
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+  } */
+  /* .page-header h1 a {
+    line-height: 1.24;
+    margin: 1.2rem 0px;
+    margin-right: 1rem;
     font-size: 36px !important;
   }
   .page-header .section-nav-container {
@@ -26,10 +38,10 @@
     flex-direction: row;
     width: 100% !important;
     padding: 10px 0px;
-    justify-content: space-between;
   }
   .page-header .section-nav-container li {
     list-style: none;
+    margin-right: 1rem;
   }
   .page-header .section-nav-container a {
     font-size: 14px;
@@ -53,22 +65,63 @@
   .page-header .section-nav-container h1 a,
   .page-header .section-nav-container h1 a:hover {
     color: var(--text) !important;
+  } */
+
+  .title {
+    font-style: normal;
+    text-align: justify;
+    line-height: 1.24;
+    margin: 1.2rem 0px;
+    font-size: 3rem;
+    text-transform: uppercase;
+    display: block;
+  }
+  .title,
+  .subtitle {
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text);
+  }
+  ul {
+    margin: 1.2rem 0px;
+    align-items: center;
+  }
+  .subtitle {
+    font-size: 1.4rem;
+    text-transform: lowercase;
+  }
+  ul li {
+    list-style: none;
+  }
+  .middot {
+    color: var(--text);
+    display: inline-block;
+    margin: 0px 10px 0px 5px;
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
   }
 </style>
 
 <div class="page-header">
-  <ul class="flex-row section-nav-wrapper">
-    <li class="base section-nav-container">
-      {#if title}
-        <h1>
-          <a href={`${title.path}`}>{title.title}</a>
-        </h1>
-      {/if}
-      {#each links as link}
-        <li key={link.path}>
-          <a use:active href={`${link.path}`}>{link.title}</a>
-        </li>
-      {/each}
-    </li>
+  {#if title}
+    <h1>
+      <a class="title" href={`${title.path}`}>{title.title}</a>
+    </h1>
+  {/if}
+  <ul class="flex-row">
+    {#each links as link, index}
+      <li key={link.path}>
+        <a class="subtitle" use:active href={`${title.path}${link.path}`}>
+          {link.title}
+        </a>
+        {#if index !== links.length - 1}
+          <span class="middot">&middot;</span>
+        {/if}
+      </li>
+    {/each}
   </ul>
 </div>

@@ -2,10 +2,28 @@
   import { Route } from "tinro";
   import Header from "./components/Header.svelte";
   import NotFound from "./containers/NotFound.svelte";
-  import BlohHeader from "./containers/Blog/BlohHeader.svelte";
-  import BlogRoot from "./containers/Blog/BlogRoot.svelte";
+  import BlogHeader from "./containers/Blog/BlogHeader.svelte";
   import BlogCategory from "./containers/Blog/BlogCategory.svelte";
   import Home from "./containers/Home/Home.svelte";
+  import BlogDetails from "./containers/Blog/BlogDetails.svelte";
+  import { getBlogContent } from "./actions/blog";
+  import { onMount } from "svelte";
+
+  let content = {};
+  let pageHeader = { title: {}, links: [] };
+  let blogBasePath;
+  onMount(async () => {
+    content = await getBlogContent();
+    blogBasePath = content.path;
+    pageHeader = {
+      title: { path: content.path, title: content.title },
+      links: content.pages.map((c) => ({
+        path: c.path,
+        title: c.title,
+        description: c.description,
+      })),
+    };
+  });
 
   let theme = localStorage.getItem("theme") || "light";
 
@@ -13,7 +31,9 @@
     const newTheme = theme === "light" ? "dark" : "light";
     localStorage.setItem("theme", newTheme);
     theme = newTheme;
+    document.bgColor = theme === "light" ? "#fff" : "#000";
   };
+  document.bgColor = theme === "light" ? "#fff" : "#000";
 </script>
 
 <style>
@@ -45,14 +65,16 @@
     --text: #000;
     --background: #fff;
     --edge: #f6f6f6;
-    --neutral: #9c9999;
+    --neutral: #6d6d6d;
+    --accent: #d29b1e;
   }
   :global(.theme-dark) {
     --primary: #19ce7e;
-    --text: #fff;
+    --text: rgb(232, 230, 227);
     --background: #000;
     --edge: #1a1818;
-    --neutral: #383636;
+    --neutral: #afafafde;
+    --accent: #d29b1e;
   }
 </style>
 
@@ -61,20 +83,25 @@
     <Header on:themeChange={onThemeChange} />
     <Route>
       <Route path="/">
-        <Home />
+        <Home {pageHeader} />
       </Route>
-      <Route path="/blog/*">
-        <BlohHeader />
-        <Route path="/">
-          <BlogRoot />
+      {#if blogBasePath}
+        <Route path={`${blogBasePath}/*`}>
+          <BlogHeader title={pageHeader.title} links={pageHeader.links} />
+          <Route
+            path="/"
+            redirect={`${blogBasePath}${pageHeader.links.length ? pageHeader.links[0].path : ''}`} />
+          <Route path="/:category" let:params>
+            <BlogCategory {content} basePath={blogBasePath} {params} />
+          </Route>
+          <Route path="/:category/:title" let:params>
+            <BlogDetails {content} {params} />
+          </Route>
+          <Route fallback>
+            <NotFound />
+          </Route>
         </Route>
-        <Route path="/category-one">
-          <BlogCategory />
-        </Route>
-        <Route fallback>
-          <NotFound />
-        </Route>
-      </Route>
+      {/if}
       <Route fallback>
         <NotFound />
       </Route>

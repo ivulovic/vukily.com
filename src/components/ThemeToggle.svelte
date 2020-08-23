@@ -10,7 +10,6 @@
   .toggle {
     cursor: pointer;
     display: inline-block;
-    margin-left: 10px;
   }
   .toggle-switch {
     display: inline-block;
@@ -47,11 +46,6 @@
     position: absolute;
     visibility: hidden;
   }
-  .toggle-label {
-    margin-left: 5px;
-    position: relative;
-    top: 2px;
-  }
 </style>
 
 <label class="toggle">
@@ -61,5 +55,4 @@
     type="checkbox"
     on:change />
   <div class="toggle-switch" />
-  <span class="toggle-label" />
 </label>

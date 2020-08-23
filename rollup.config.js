@@ -3,12 +3,14 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import dev from 'rollup-plugin-dev';
+import path from 'path';
 
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
 	let server;
-	
+
 	function toExit() {
 		if (server) server.kill(0);
 	}
@@ -44,7 +46,7 @@ export default {
 			css: css => {
 				css.write('public/build/bundle.css', false);
 			}
-		}), 
+		}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
@@ -59,7 +61,12 @@ export default {
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
-		!production && serve(),
+		!production && dev({
+			dirs: ['public'],
+			port: 3000,
+			proxy: { '/api/blog/*': 'http://localhost:5002/' },
+			spa: path.join('public', 'index.html'),
+		}),
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
