@@ -52,6 +52,7 @@
   }
   :global(.ql-editor) {
     padding: 0px !important;
+    font-family: "Varela Round", sans-serif !important;
   }
 
   :global(.ql-snow a) {
