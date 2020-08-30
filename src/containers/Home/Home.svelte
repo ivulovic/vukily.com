@@ -1,5 +1,12 @@
 <script>
+  import Meta from "../../components/Meta.svelte";
+
   export let pageHeader;
+  let metadata = {
+    title: "vukily",
+    hideTitleSuffix: true,
+    description: "Ivan Vulović",
+  };
 </script>
 
 <style>
@@ -34,7 +41,7 @@
   }
   .about {
     font-weight: 400;
-    font-family: "Varela Round", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 1.2rem 0px;
     line-height: 1.6rem;
     text-align: justify;
@@ -64,7 +71,7 @@
     display: inline-block;
   }
   ul li a {
-    font-family: "Varela Round", sans-serif;
+    font-family: "Roboto", sans-serif;
     display: grid;
     grid-row-gap: 0.5rem;
     text-decoration: none;
@@ -102,6 +109,7 @@
   }
 </style>
 
+<Meta {metadata} />
 <main>
   <h1 class="title">IVAN VULOVIĆ</h1>
   <h2 class="subtitle">

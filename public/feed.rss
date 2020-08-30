@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>vukily početna stranica</title>
+    <link>https://vukily.com</link>
+    <description>Ivan Vulovic Personal Website</description>
+     <item>
+      <category domain="https://vukily.com/blog">Blog</category>
+      <title>Blog</title>
+      <link>https://vukily.com/blog</link>
+      <description>Blog početna stranica</description>
+    </item>
+    <item>
+      <category domain="https://vukily.com/blog/licno">Lično</category>
+      <title>vukily o postanku</title>
+      <link>https://vukily.com/blog/licno/vukily-o-postanku</link>
+      <description>kako je nastao moj blog i čemu uopšte potreba za tim</description>
+    </item>
+    <item>
+      <category domain="https://vukily.com/blog/stav">Stav</category>
+      <title>uzmi sad pa ko zna kad</title>
+      <link>https://vukily.com/blog/stav/uzmi-sad-pa-ko-zna-kad</link>
+      <description>o nepotrebno teškim i možda-ti-zatreba proizvodima</description>
+    </item>
+    <item>
+      <category domain="https://vukily.com/blog/razvoj">Razvoj</category>
+      <title>pa je l' se to nama bundle size malo popravio?</title>
+      <link>https://vukily.com/blog/razvoj/pa-je-l-se-to-nama-bundle-size-malo-popravio</link>
+      <description>prepisivanje i podela aplikacije na više delova</description>
+    </item>
+  </channel>
+</rss>

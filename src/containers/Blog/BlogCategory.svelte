@@ -1,17 +1,23 @@
 <script>
-  import { blogs as data } from "../../../public/data";
+  import Meta from "../../components/Meta.svelte";
+
   export let params = {};
   export let content;
   export let basePath;
   let articles = [];
+  let metadata = {};
+
   $: {
     let currentPage = content.pages.find(
       (x) => x.path === "/" + params.category
     );
-
     if (currentPage) {
       articles = currentPage.articles;
     }
+    metadata = {
+      title: currentPage.title,
+      description: currentPage.description,
+    };
   }
 </script>
 
@@ -38,7 +44,7 @@
     text-align: justify;
     color: var(--text);
     line-height: 24px;
-    font-family: "Varela Round", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
   main {
     display: grid;
@@ -52,6 +58,7 @@
   }
 </style>
 
+<Meta {metadata} />
 <main>
   {#if !articles.length}
     <h2 class="title">Ne postoji nijedan zapis u ovoj kategoriji</h2>

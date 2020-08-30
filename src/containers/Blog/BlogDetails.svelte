@@ -1,9 +1,12 @@
 <script>
-  import { blogs as data } from "../../../public/data";
+  import Meta from "../../components/Meta.svelte";
   import NotFound from "../NotFound.svelte";
   export let params = {};
   export let content;
   let currentArticle;
+
+  let metadata = {};
+
   $: {
     let currentPage = content.pages.find(
       (x) => x.path === "/" + params.category
@@ -13,6 +16,10 @@
       currentArticle = currentPage.articles.find(
         (x) => x.path === "/" + params.title
       );
+      metadata = {
+        title: currentArticle.title,
+        description: currentArticle.description,
+      };
     }
   }
 </script>
@@ -35,7 +42,7 @@
   main {
     color: var(--text);
     font-weight: 400;
-    font-family: "Varela Round", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 1.2rem 0px;
     line-height: 1.6rem;
     text-align: justify;
@@ -52,7 +59,7 @@
   }
   :global(.ql-editor) {
     padding: 0px !important;
-    font-family: "Varela Round", sans-serif !important;
+    font-family: "Roboto", sans-serif !important;
   }
 
   :global(.ql-snow a) {
@@ -77,6 +84,7 @@
   }
 </style>
 
+<Meta {metadata} />
 <main>
   {#if currentArticle}
     <h2 class="title">{currentArticle.title}</h2>
