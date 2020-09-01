@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   import Meta from "../../components/Meta.svelte";
 
   export let pageHeader;
@@ -7,6 +9,11 @@
     hideTitleSuffix: true,
     description: "Ivan Vulović",
   };
+  onMount(async () => {
+    if (location.hostname !== "localhost") {
+      gtag("config", "UA-176986597-1", { page_path: location.pathname });
+    }
+  });
 </script>
 
 <style>
@@ -118,12 +125,11 @@
   </h2>
   <h3 class="about">
     Ovaj sajt postoji jer sam želeo da pokažem svoj način razmišljanja i kako
-    koristim tehnologiju. Najveći deo ćete videti u sekciji
-    <a href="/blog">Blog</a>
-    . Tu će biti dosta razmišljanja i komentara na razne teme iz sveta i
-    generalno dešavanja na tehnološkoj sceni. Ovde ću predstaviti i projekte na
-    kojima radim, kao i one koje sam napustio, koji su razlozi za sve to, kao i
-    koje jezike koristim dok razvijam aplikacije.
+    koristim tehnologiju. Najveći deo ćete videti u sekciji <a
+      href="/blog">Blog</a> . Tu će biti dosta razmišljanja i komentara na razne
+    teme iz sveta i generalno dešavanja na tehnološkoj sceni. Ovde ću predstaviti
+    i projekte na kojima radim, kao i one koje sam napustio, koji su razlozi za sve
+    to, kao i koje jezike koristim dok razvijam aplikacije.
   </h3>
   <div class="col-3">
     <div>

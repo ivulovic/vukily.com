@@ -1,6 +1,7 @@
 <script>
   import Meta from "../../components/Meta.svelte";
 
+  import { onMount } from "svelte";
   export let params = {};
   export let content;
   export let basePath;
@@ -19,6 +20,12 @@
       description: currentPage.description,
     };
   }
+
+  onMount(async () => {
+    if (location.hostname !== "localhost") {
+      gtag("config", "UA-176986597-1", { page_path: location.pathname });
+    }
+  });
 </script>
 
 <style>
