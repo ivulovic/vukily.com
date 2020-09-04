@@ -20,9 +20,11 @@
 	<meta name="keywords" content="ivan vulović, ivulovic, vukily, developer, blog, lični sajt, personal website" />
 	<meta name="description" content="Ivan Vulović | vukily | Lični sajt | Personal website | Blog" />
 	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/build/bundle.css'>
-	<link rel='stylesheet' href='/quill.css'>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@400;600&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/build/bundle.css">
+	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+		href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@400;600&display=swap">
+	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/quill.css">
 
 	<meta name="google-site-verification" content="hXzsfO1iEbN1YLIXryoPfvPH8SMbTnv_VUUzXh7GLWI" />
 
@@ -47,6 +49,10 @@
 	<meta name="twitter:title" content="vukily" />
 	<meta name="twitter:description" content="Ivan Vulović" />
 	<meta name="twitter:image" content="https://vukily.com/logo_large.png" />
+
+
+	<!-- Load CSS async-->
+
 
 	<!-- Rest of dynamic added meta tags-->
 
