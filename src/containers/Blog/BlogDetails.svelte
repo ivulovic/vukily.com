@@ -1,8 +1,9 @@
 <script>
   import Meta from "../../components/Meta.svelte";
   import NotFound from "../NotFound.svelte";
-  import { onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
+  const dispatch = createEventDispatcher();
   export let params = {};
   export let content;
   let currentArticle;
@@ -26,6 +27,9 @@
   }
 
   onMount(async () => {
+    if (!currentArticle.content) {
+      dispatch("loadArticleContent", params);
+    }
     if (location.hostname !== "localhost") {
       gtag("config", "UA-176986597-1", { page_path: location.pathname });
     }
@@ -97,9 +101,11 @@
   {#if currentArticle}
     <h2 class="title">{currentArticle.title}</h2>
     <div class="editor ql-container ql-snow">
-      <div class="description ql-editor">
-        {@html currentArticle.content}
-      </div>
+      {#if currentArticle.content}
+        <div class="description ql-editor">
+          {@html currentArticle.content}
+        </div>
+      {/if}
     </div>
   {:else}
     <NotFound />

@@ -6,12 +6,42 @@
   import BlogCategory from "./containers/Blog/BlogCategory.svelte";
   import Home from "./containers/Home/Home.svelte";
   import BlogDetails from "./containers/Blog/BlogDetails.svelte";
-  import { getBlogContent } from "./actions/blog";
+  import { getBlogContent, getArticleContent } from "./actions/blog";
   import { onMount } from "svelte";
 
   let content = {};
   let pageHeader = { title: {}, links: [] };
   let blogBasePath;
+
+  const loadArticleContent = async ({ detail }) => {
+    const category = "/" + detail.category;
+    const title = "/" + detail.title;
+    let contentCopy = content;
+
+    const articleContent = await getArticleContent({
+      article: title,
+      page: category,
+    });
+
+    let pages = contentCopy.pages.map((p) => {
+      let page = p;
+      if (page.path === category) {
+        if (page.articles) {
+          page.articles = page.articles.map((a) => {
+            let article = a;
+            if (article.path === title) {
+              article.content = articleContent.content;
+            }
+            return article;
+          });
+        }
+      }
+      return page;
+    });
+
+    content.pages = pages;
+  };
+
   onMount(async () => {
     content = await getBlogContent();
     blogBasePath = content.path;
@@ -95,7 +125,10 @@
             <BlogCategory {content} basePath={blogBasePath} {params} />
           </Route>
           <Route path="/:category/:title" let:params>
-            <BlogDetails {content} {params} />
+            <BlogDetails
+              {content}
+              {params}
+              on:loadArticleContent={loadArticleContent} />
           </Route>
           <Route fallback>
             <NotFound />

@@ -21,6 +21,11 @@ export function makeGetReq() {
   return makeGenericReq('GET');
 }
 
+export function makePostReq(body) {
+  return makeGenericReq('POST', body);
+}
+
+
 
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
