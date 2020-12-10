@@ -59,13 +59,14 @@
     font-weight: 500;
     color: var(--primary);
   }
-  .col-3 {
+  .col-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     /* grid-template-columns: 1fr 2fr; */
     grid-column-gap: 2rem;
     grid-row-gap: 2rem;
-    margin: 1.2rem 0px;
+    margin: 0px;
+    /* margin: 1.2rem 0px; */
   }
   .uppercase {
     text-transform: uppercase;
@@ -108,8 +109,8 @@
   .accent {
     color: var(--accent);
   }
-  @media only screen and (max-width: 1024px) {
-    .col-3 {
+  @media only screen and (max-width: 640px) {
+    .col-2 {
       display: flex;
       flex-direction: column;
     }
@@ -131,7 +132,7 @@
     predstaviti i projekte na kojima radim, kao i one koje sam napustio, koji su
     razlozi za sve to, kao i koje jezike koristim dok razvijam aplikacije.
   </h3> -->
-  <div class="col-3">
+  <div class="col-2">
     <div>
       <h2 class="subtitle uppercase">
         <a href={`${pageHeader.title.path}`}>{pageHeader.title.title || ''}</a>
@@ -160,7 +161,7 @@
         </li>
       </ul>
     </div> -->
-    <div>
+    <!-- <div>
       <h2 class="subtitle uppercase">Projekti</h2>
       <ul>
         <li>
@@ -170,8 +171,8 @@
           </a>
         </li>
       </ul>
-      <!-- <strong class="subtitle subsubtitle uppercase"> ... </strong> -->
-    </div>
+    </div> -->
+    <!-- <strong class="subtitle subsubtitle uppercase"> ... </strong> -->
     <div>
       <h2 class="subtitle uppercase">Kontakt</h2>
       <ul>
@@ -180,20 +181,20 @@
             href="https://www.linkedin.com/in/ivulovic/"
             target="new"
             tinro-ignore>
-            <p class="link-title">LinkedIn</p>
+            <p class="link-title uppercase">LinkedIn</p>
             <p class="link-description">Povežimo se</p>
           </a>
         </li>
         <li>
           <a href="https://twitter.com/vukily" target="new" tinro-ignore>
-            <p class="link-title">Twitter</p>
+            <p class="link-title uppercase">Twitter</p>
             <p class="link-description">Prozborimo koju</p>
           </a>
         </li>
         <li>
           <a href="https://github.com/ivulovic" target="new" tinro-ignore>
-            <p class="link-title">GitHub</p>
-            <p class="link-description">Udari gde najviše boli</p>
+            <p class="link-title uppercase">GitHub</p>
+            <p class="link-description">Hajde da radimo</p>
           </a>
         </li>
       </ul>
